@@ -84,7 +84,7 @@ io.on('connection', (socket) => {
     });
 });
 
-// const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 
 // 1. Получение только тех пользователей, с кем уже есть переписка
