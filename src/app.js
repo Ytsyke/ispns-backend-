@@ -8,7 +8,7 @@ const Message = require('./models/Message');
 const  User  = require('./models/User');
 const Task = require('./models/Task');
 const Shift = require('./models/Shift');
-
+const { Op } = require('sequelize');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -84,7 +84,7 @@ io.on('connection', (socket) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
 
 // 1. Получение только тех пользователей, с кем уже есть переписка
@@ -137,9 +137,8 @@ app.get('/api/auth/search/:username', async (req, res) => {
         const users = await User.findAll({ 
             where: { 
                 username: {
-                    // [Op.iLike] — это фишка Postgres для поиска без учета регистра
-                    // % в начале и конце значит "содержит это слово"
-                    [require('sequelize').Op.iLike]: `%${username}%` 
+                    
+                    [Op.iLike]: `%${username}%`
                 }
             },
             attributes: ['id', 'username'],
