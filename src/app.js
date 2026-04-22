@@ -86,6 +86,7 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3000;
 
+
 // 1. Получение только тех пользователей, с кем уже есть переписка
 app.get('/api/chat/active-dialogs/:username', async (req, res) => {
     const { username } = req.params;
@@ -172,7 +173,7 @@ app.put('/api/chat/read', async (req, res) => {
 });
 // Синхронизация БД и запуск
 sequelize.sync({ alter: true }).then(() => {
-    server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+    server.listen(PORT, '0.0.0.0', () => console.log(`Server is running on port ${PORT}`));
 });
 // --- API для ЗАДАЧ ---
 app.get('/api/tasks/:userId', async (req, res) => {
